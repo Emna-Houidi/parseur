@@ -1,0 +1,48 @@
+package com.parseur.test.api;
+
+import com.parseur.test.utils.NumberUtils;
+
+public class ParseurApi {
+	
+	 int convertRomanToInt(String s)   
+	  {   
+	//variable to store the sum  
+	    int total = 0;   
+	//loop iterate over the string (given roman numeral)  
+	//getting value from symbol s1[i]  
+	    for (int i=0; i<s.length(); i++)   
+	    {   
+	      int s1 = NumberUtils.romanCharToInt(s.charAt(i));   
+	//getting value of symbol s2[i+1]  
+	      if (i+1 <s.length())   
+	      {   
+	        int s2 = NumberUtils.romanCharToInt(s.charAt(i+1));   
+	//comparing the current character from its right character   
+	        if (s1 >= s2)   
+	        {   
+	//if the value of current character is greater or equal to the next symbol  
+	          total = total + s1;   
+	        }   
+	        else  
+	        {   
+	//if the value of the current character is less than the next symbol  
+	          total = total - s1;   
+	        }   
+	      }   
+	      else  
+	      {   
+	        total = total + s1;   
+	      }   
+	    }   
+	//returns corresponding integer value  
+	    return total;   
+	  }   
+	  //driver code  
+	  public static void main(String args[])   
+	  {   
+		  ParseurApi ob = new ParseurApi();  
+	    String romanStr= "MCMXV";   
+	    System.out.println("The corresponding Integer value is: "+ob.convertRomanToInt(romanStr));   
+	  }   
+
+}

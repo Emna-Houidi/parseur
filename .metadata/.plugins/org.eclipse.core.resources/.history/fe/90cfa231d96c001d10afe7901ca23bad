@@ -1,0 +1,39 @@
+package com.parseur.test.api;
+
+import com.parseur.test.utils.NumberUtils;
+
+public class ParseurApi {
+	
+	private void checkValidity(String c, int previousValue){
+        if((c.equals("V") && previousValue == 10) || (c.equals("L") && previousValue == 100)
+                || (c.equals("D") && previousValue == 1000)){
+            throw new NumberFormatException("Invalid roman number");
+        }
+    }
+
+	public int parse(String s) {
+		int n = s.length();
+		  int result = 0;
+		  
+		  if (n == 0) return result;
+		  
+		  for (int i = 0; i < n - 1; ++i) {
+		    int curr = NumberUtils.romanCharToInt(s.charAt(i));
+		    int next = NumberUtils.romanCharToInt(s.charAt(i + 1));
+		    if (curr < next) {
+		      result -= curr;
+		    } else {
+		      result += curr;
+		    }
+		  }
+		  return result + NumberUtils.romanCharToInt(s.charAt(n - 1));
+	}
+
+	// driver code
+	public static void main(String args[]) {
+		ParseurApi ob = new ParseurApi();
+		String romanStr = "1XI";
+		System.out.println("The corresponding Integer value is: " + ob.parse(romanStr));
+	}
+
+}

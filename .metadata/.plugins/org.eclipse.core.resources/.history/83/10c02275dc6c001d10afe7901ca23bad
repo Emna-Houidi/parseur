@@ -1,0 +1,43 @@
+package com.parseur.test.api;
+
+import com.parseur.test.utils.NumberUtils;
+
+/**
+ * class implementation {@link ParseurApi}
+ * 
+ * @author EMNA-PC
+ *
+ */
+public class ParseurApi {
+
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public int parse(String romanChar) {
+
+		int n = romanChar.length();
+		int result = 0;
+
+		if (n == 0)
+			return result;
+
+		// check if the romain number is valid or not
+		if (romanChar != null && !NumberUtils.validateRomanChar(romanChar)) {
+			throw new NumberFormatException("Invalid roman number");
+		}
+
+		for (int i = 0; i < n - 1; ++i) {
+			int curr = NumberUtils.romanCharToInt(romanChar.charAt(i));
+			int next = NumberUtils.romanCharToInt(romanChar.charAt(i + 1));
+			if (curr < next) {
+				result -= curr;
+			} else {
+				result += curr;
+			}
+		}
+		return result + NumberUtils.romanCharToInt(romanChar.charAt(n - 1));
+	}
+
+}

@@ -1,0 +1,43 @@
+package com.parseur.test.api;
+
+import com.parseur.test.utils.NumberUtils;
+
+/**
+ * class implementation {@link ParseurApi}
+ * 
+ * @author EMNA-PC
+ *
+ */
+public class ParseurApi {
+
+	public int parse(String s) {
+		
+		//validate if the string is valid roman char 
+		if (s != null && !NumberUtils.validateRomanChar(s)) {
+			throw new NumberFormatException("Invalid roman number");
+		}
+		int n = s.length();
+		  int result = 0;
+		  
+		  if (n == 0) return result;
+		  
+		  for (int i = 0; i < n - 1; ++i) {
+		    int curr = NumberUtils.romanCharToInt(s.charAt(i));
+		    int next = NumberUtils.romanCharToInt(s.charAt(i + 1));
+		    if (curr < next) {
+		      result -= curr;
+		    } else {
+		      result += curr;
+		    }
+		  }
+		  return result + NumberUtils.romanCharToInt(s.charAt(n - 1));
+	}
+
+	// driver code
+	public static void main(String args[]) {
+		ParseurApi ob = new ParseurApi();
+		String romanStr = "XI";
+		System.out.println("The corresponding Integer value is: " + ob.parse(romanStr));
+	}
+
+}

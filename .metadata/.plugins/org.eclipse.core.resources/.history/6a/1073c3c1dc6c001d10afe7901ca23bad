@@ -1,0 +1,76 @@
+package com.parseur.test.utils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * {@link NumberUtils} utility class.
+ * 
+ * @author EMNA-PC
+ *
+ */
+public final class NumberUtils {
+	
+	/**
+	 * private constructor 
+	 */
+	private NumberUtils() {
+		
+		//this constructor will not be called.
+	}
+	
+	/**
+	 * This method allows to convert a roman character to a integer number. 
+	 * 
+	 * @param romanChar
+	 *         the roman character.
+	 * @return
+	 *      a number of type int.
+	 */
+	public static int romanCharToInt(char romanChar){
+        final int number;
+        switch(romanChar) {
+        case 'I':
+        	number=1;
+        	break;
+        case 'V':
+        	number=5;
+        	break;
+        case 'X':
+        	number=10;
+        	break;
+        case 'L':
+        	number=50;
+        	break;
+        case 'C':
+        	number=100;
+        	break;
+        case 'D':
+        	number=500;
+        	break;
+        case 'M':
+        	number=1000;
+        	break;
+        default:
+        	throw new IllegalStateException("Invalid roman character : " + romanChar);
+        } 
+        return number;
+    }
+	
+	/**
+	 * this method checks whether the roman 
+	 *              character is valid or not using regular expression.
+	 * 
+	 * @param romanChar
+	 *             the roman character.
+	 * 
+	 * @return true in case valid, false otherwise.
+	 */
+	public static boolean validateRomanChar(String romanChar) {
+		String regularExp = "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$";
+		Pattern pattern = Pattern.compile(regularExp);
+		Matcher matcher = pattern.matcher(romanChar);
+		return matcher.matches();
+	}
+
+}
